@@ -1,7 +1,7 @@
 /*!
 Theme Name: LifeSites2021
 Theme URI: http://underscores.me/
-Author: Underscores.me
+Author: Kees & Underscores.me
 Author URI: http://underscores.me/
 Description: Description
 Version: 1.0.0
@@ -68,6 +68,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  */
 html {
 	line-height: 1.15;
+	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
 }
 
@@ -403,7 +404,7 @@ select,
 optgroup,
 textarea {
 	color: #404040;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "DM Sans", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 1rem;
 	line-height: 1.5;
 }
@@ -417,8 +418,28 @@ h6 {
 	clear: both;
 }
 
+h2 {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 32px;
+	line-height: 36px;
+	font-weight: 700;
+  }
+  
+  h4 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-family: 'DM Sans', sans-serif;
+	color: #000;
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: 700;
+  }
+  
 p {
 	margin-bottom: 1.5em;
+	color: #000;
 }
 
 dfn,
@@ -644,12 +665,55 @@ textarea {
 /*--------------------------------------------------------------
 # Components
 --------------------------------------------------------------*/
+.site-header {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	height: 141px;
+}
+
+.main-menu {
+	display: flex;
+	max-width: 900px;
+	min-width: 900px;
+	margin-right: auto;
+	margin-left: auto;
+    padding-right: 50px;
+    padding-left: 50px;
+
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-box-pack: end;
+	-webkit-justify-content: flex-end;
+	-ms-flex-pack: end;
+	justify-content: flex-end;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+  }
+
+
+.site-branding {
+	width: 80px;
+	height: 80px;
+	margin-right: auto;
+	margin-left: 0px;
+}
 
 /* Navigation
 --------------------------------------------- */
-.main-navigation {
-	display: block;
-	width: 100%;
+.main-navigation {	
+	display: flex;
 }
 
 .main-navigation ul {
@@ -661,6 +725,8 @@ textarea {
 
 .main-navigation ul ul {
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+	border-color: #000;
+	border: 1px solid #000;
 	float: left;
 	position: absolute;
 	top: 100%;
@@ -690,12 +756,47 @@ textarea {
 
 .main-navigation li {
 	position: relative;
+	width: auto;
+	min-width: auto;
+	margin-right: 30px;
+	margin-left: 0px;
+	text-align: left;
+}
+
+.main-navigation ul ul li {
+	display: block;
+	position:unset;
 }
 
 .main-navigation a {
 	display: block;
 	text-decoration: none;
 }
+
+
+.menu-item a {
+	font-family: 'DM Sans', sans-serif;
+	color: #000;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.menu-item a:visited {
+	color: #000;
+}
+
+.menu-item a:hover {
+	color: #fb5045;
+}
+
+/*.menu-item-has-children  > a:after {
+	content: 'v';
+	font-family: FontAwesome;
+	font-weight: normal;
+	font-style: normal;
+	margin:0px 0px 0px 10px;
+	text-decoration:none;
+}*/
 
 /* Small menu. */
 .menu-toggle,
@@ -759,12 +860,17 @@ textarea {
 .page-content,
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
+	/* margin: 1.5em 0 0;*/
+	margin : 0 0 0;
 }
 
 .page-links {
 	clear: both;
 	margin: 0 0 1.5em;
+}
+
+.wp-block-columns {
+	margin-bottom: 0em;
 }
 
 /* Comments

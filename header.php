@@ -26,6 +26,7 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'lifesites2021' ); ?></a>
 
 	<header id="masthead" class="site-header">
+		<div class="main-menu">
 		<div class="site-branding">
 			<?php
 			the_custom_logo();
@@ -51,9 +52,11 @@
 			wp_nav_menu(
 				array(
 					'theme_location' => 'menu-1',
+					'show_sub_menu_icons' => true,
 					'menu_id'        => 'primary-menu',
 				)
 			);
 			?>
 		</nav><!-- #site-navigation -->
+		</div>
 	</header><!-- #masthead -->
