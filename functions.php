@@ -137,6 +137,40 @@ function lifesites2021_widgets_init() {
 add_action( 'widgets_init', 'lifesites2021_widgets_init' );
 
 /**
+ * Add the deault colors to the editor
+ */
+function lifesites2021_setup_theme_supported_features() {
+    add_theme_support( 'editor-color-palette', array(
+        array(
+            'name' => esc_attr__( 'Life red', 'lifesites2021' ),
+            'slug' => 'life-red',
+            'color' => '#fb5045',
+        ),
+        array(
+            'name' => esc_attr__( 'Life green', 'lifesites2021' ),
+            'slug' => 'life-green',
+            'color' => '#166772',
+        ),
+        array(
+            'name' => esc_attr__( 'Life Yellow', 'lifesites2021' ),
+            'slug' => 'life-yellow',
+            'color' => '#ffd559',
+        ),
+        array(
+            'name' => esc_attr__( 'white', 'lifesites2021' ),
+            'slug' => 'life-white',
+            'color' => '#ffffff',
+        ),
+		array(
+            'name' => esc_attr__( 'black', 'lifesites2021' ),
+            'slug' => 'life-black',
+            'color' => '#000000',
+        ),
+    ) );
+}
+ 
+add_action( 'after_setup_theme', 'lifesites2021_setup_theme_supported_features' );
+/**
  * Enqueue scripts and styles.
  */
 function lifesites2021_scripts() {

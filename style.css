@@ -1073,3 +1073,37 @@ textarea {
 	margin-right: auto;
 	margin-bottom: 1.5em;
 }
+
+/* LIFE colors, set in editor
+ --------------------------------------------- */
+ .has-life-red-color {
+	color: #fb5045;
+}
+.has-life-green-color {
+	color: #166772;
+}
+.has-life-yellow-color {
+	color: #ffd559;
+}
+.has-life-black-color {
+	color: #000000;
+}
+.has-life-white-color {
+	color: #ffffff;
+}
+
+.has-life-red-background-color {
+	background-color: #fb5045;
+}
+.has-life-green-background-color {
+	background-color: #166772;
+}
+.has-life-yellow-background-color {
+	background-color: #ffd559;
+}
+.has-life-black-background-color {
+	background-color: #000000;
+}
+.has-life-white-background-color {
+	background-color: #ffffff;
+}
