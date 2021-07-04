@@ -860,8 +860,16 @@ textarea {
 .page-content,
 .entry-content,
 .entry-summary {
-	/* margin: 1.5em 0 0;*/
-	margin : 0 0 0;
+	margin : 0 0 0; /* full width */
+}
+
+.entry-content p {
+	padding: 0 3em; /* todo : depending on page width */
+}
+
+.entry-title-inside-header-image {
+	margin: -4em 0 3em 3em; /* todo : depending on page width */
+	color: white;
 }
 
 .page-links {
@@ -871,6 +879,7 @@ textarea {
 
 .wp-block-columns {
 	margin-bottom: 0em;
+	padding: 1.25em 3em;
 }
 
 /* Comments

@@ -10,10 +10,9 @@
  */
 
 ?>
-
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
-
+			<?php $footer_page = get_page_by_path( 'footer' );echo apply_filters('the_content', $footer_page->post_content); ?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

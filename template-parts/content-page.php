@@ -11,10 +11,14 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+	<?php // check if the post or page has a Featured Image assigned to it.
+		if ( has_post_thumbnail() ) {
+			lifesites2021_post_thumbnail();
+			the_title( '<h1 class="entry-title entry-title-inside-header-image">', '</h1>' );
+		} else {
+			the_title( '<h1 class="entry-title">', '</h1>' ); } ?>
 	</header><!-- .entry-header -->
 
-	<?php lifesites2021_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
