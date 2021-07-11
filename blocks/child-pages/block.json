@@ -1,0 +1,85 @@
+{
+	"apiVersion": 2,
+	"name": "core/child-pages",
+	"category": "widgets",
+	"attributes": {
+		"pagesToShow": {
+			"type": "number",
+			"default": 5
+		},
+		"displayPostContent": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayPostContentRadio": {
+			"type": "string",
+			"default": "excerpt"
+		},
+		"excerptLength": {
+			"type": "number",
+			"default": 20
+		},
+		"postLayout": {
+			"type": "string",
+			"default": "grid",
+            "enum": [
+				"grid",
+				"list"
+			]
+		},
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"sort_order": {
+			"type": "string",
+			"default": "ASC"
+		},
+		"sort_column": {
+			"type": "string",
+			"default": "menu_order"
+		},
+		"displayFeaturedImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"featuredImageAlign": {
+			"type": "string",
+			"enum": [
+				"left",
+				"center",
+				"right"
+			],
+            "default":"center"
+		},
+		"featuredImageSizeSlug": {
+			"type": "string",
+            "enum": [
+				"thumbnail",
+				"medium",
+				"large",
+				"full"
+			],
+			"default": "large"
+		},
+		"featuredImageSizeWidth": {
+			"type": "number",
+			"default": null
+		},
+		"featuredImageSizeHeight": {
+			"type": "number",
+			"default": null
+		},
+        "addLinkToFeaturedImage": {
+            "type": "boolean",
+            "default": true
+        }
+
+	},
+	"supports": {
+		"align": true,
+		"html": false
+	},
+	"editorStyle": "wp-block-child-pages-editor",
+	"style": "wp-block-child-pages"
+}

@@ -205,6 +205,20 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 
+if ( ! function_exists('write_log')) {
+	function write_log ( $log )  {
+	   if ( is_array( $log ) || is_object( $log ) ) {
+		  error_log( print_r( $log, true ) );
+	   } else {
+		  error_log( $log );
+	   }
+	}
+ }
+/**
+ * Block editor : child-pages
+ */
+require get_template_directory() . '/blocks/child-pages.php';
+
 /**
  * Load Jetpack compatibility file.
  */

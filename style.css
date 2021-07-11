@@ -1,8 +1,8 @@
 /*!
 Theme Name: LifeSites2021
-Theme URI: http://underscores.me/
+Theme URI: http://LifeSites2021.not/
 Author: Kees & Underscores.me
-Author URI: http://underscores.me/
+Author URI: https://github.com/mcginkel
 Description: Description
 Version: 1.0.0
 Tested up to: 5.4
@@ -882,6 +882,31 @@ textarea {
 	padding: 1.25em 3em;
 }
 
+/* Child Pages list 
+--------------------------------------------- */
+ul.wp-block-child-pages.is-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+	grid-auto-flow: rows;
+	margin: 0 3em;
+	padding: 0px;
+}
+
+ul.wp-block-child-pages.is-grid li {
+	background-color: white;
+	color: black;
+	display:grid;
+}
+
+ul.wp-block-child-pages.is-grid li .wp-block-child-pages__featured-image {
+	margin-bottom : 0px;
+}
+
+ul.wp-block-child-pages.is-grid li .wp-block-child-pages__content {
+	padding : 0 3em;
+	vertical-align: top;
+}
 /* Comments
 --------------------------------------------- */
 .comment-content a {
