@@ -725,13 +725,15 @@ textarea {
 
 .main-navigation ul ul {
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-	border-color: #000;
 	border: 1px solid #000;
 	float: left;
 	position: absolute;
 	top: 100%;
 	left: -999em;
 	z-index: 99999;
+	display: flex;
+	flex-direction: column;
+	background-color: #ffd559;
 }
 
 .main-navigation ul ul ul {
@@ -747,6 +749,7 @@ textarea {
 
 .main-navigation ul ul a {
 	width: 200px;
+	padding-left: 1em;
 }
 
 .main-navigation ul li:hover > ul,
