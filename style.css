@@ -866,7 +866,7 @@ textarea {
 	margin : 0 0 0; /* full width */
 }
 
-.entry-content p {
+.entry-content p, h2, h3, h4, h5 {
 	padding: 0 3em; /* todo : depending on page width */
 }
 
