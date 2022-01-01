@@ -1144,3 +1144,16 @@ ul.wp-block-child-pages.is-grid li .wp-block-child-pages__content {
 .has-life-white-ffffff-background-color {
 	background-color: #ffffff;
 }
+
+body.page-template-template-green-page main {
+	color: #ffffff;
+	background-color: #166772;
+}
+body.page-template-template-red-page main {
+	color: #ffffff;
+	background-color: #fb5045;
+}
+body.page-template-template-yellow-page main {
+	color: #000000;
+	background-color: #ffd559;
+}
