@@ -143,30 +143,31 @@ function lifesites2021_setup_theme_supported_features() {
     add_theme_support( 'editor-color-palette', array(
         array(
             'name' => esc_attr__( 'Life red', 'lifesites2021' ),
-            'slug' => 'life-red',
-            'color' => '#fb5045',
+            'slug' => 'life-red-#fb5045',
+            'color' => '#fb5045', 
         ),
         array(
             'name' => esc_attr__( 'Life green', 'lifesites2021' ),
-            'slug' => 'life-green',
+            'slug' => 'life-green-#166772',
             'color' => '#166772',
         ),
         array(
             'name' => esc_attr__( 'Life Yellow', 'lifesites2021' ),
-            'slug' => 'life-yellow',
+            'slug' => 'life-yellow-#ffd559',
             'color' => '#ffd559',
         ),
         array(
             'name' => esc_attr__( 'white', 'lifesites2021' ),
-            'slug' => 'life-white',
+            'slug' => 'life-white-#ffffff',
             'color' => '#ffffff',
         ),
 		array(
             'name' => esc_attr__( 'black', 'lifesites2021' ),
-            'slug' => 'life-black',
+            'slug' => 'life-black-#000000',
             'color' => '#000000',
         ),
     ) );
+	add_theme_support( 'disable-custom-colors' );
 }
  
 add_action( 'after_setup_theme', 'lifesites2021_setup_theme_supported_features' );
@@ -178,6 +179,11 @@ function lifesites2021_scripts() {
 	wp_style_add_data( 'lifesites2021-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'lifesites2021-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+
+	/** all smart copied functions */
+	// wp_enqueue_script( 'twentytwenty-js', get_template_directory_uri() . '/js/index.js', array(), _S_VERSION, false );
+	// wp_script_add_data( 'twentytwenty-js', 'async', true );
+
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
