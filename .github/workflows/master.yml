@@ -1,22 +1,29 @@
 name: MasterDeployCI
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 jobs:
   build:
+    name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Create Release Folder
-      run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
-    - name: Switch to Release Folder
-      run: |
-        cd release
-        ls -la
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        REPO_OWNER: mcginkel
-        WITH_V: true
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build project
+        run: |
+          mkdir build
+      - name: Create artifact
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -X -r build/lifesites2021.zip . -x *.git* node_modules/\* .* "*/\.*" README.md
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: lifesites2021
+            path: build/lifesites2021.zip
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: build/lifesites2021.zip application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
