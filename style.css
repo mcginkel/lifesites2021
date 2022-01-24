@@ -912,6 +912,16 @@ main {
 	}
 
 }
+/* wp-cover
+--------------------------------------------- */
+.wp-block-cover {
+	width:unset;
+}
+.wp-block-cover img {
+	object-fit: cover;
+	
+}
+
 
 /* Child Pages list 
 --------------------------------------------- */
