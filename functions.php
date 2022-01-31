@@ -191,6 +191,12 @@ function lifesites2021_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'lifesites2021_scripts' );
 
+function wpb_add_google_fonts() {
+	wp_enqueue_style( 'wpb-google-fonts', 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap', false );
+}
+	
+add_action( 'wp_enqueue_scripts', 'wpb_add_google_fonts' );
+
 /**
  * Implement the Custom Header feature.
  */
@@ -231,4 +237,5 @@ require get_template_directory() . '/blocks/child-pages.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
 
