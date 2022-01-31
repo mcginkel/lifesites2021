@@ -215,7 +215,7 @@ require get_template_directory() . '/inc/template-functions.php';
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/inc/customizer.php';
+//require get_template_directory() . '/inc/customizer.php';
 
 if ( ! function_exists('write_log')) {
 	function write_log ( $log )  {

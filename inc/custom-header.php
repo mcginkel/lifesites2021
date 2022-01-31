@@ -32,7 +32,7 @@ function lifesites2021_custom_header_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'lifesites2021_custom_header_setup' );
+//add_action( 'after_setup_theme', 'lifesites2021_custom_header_setup' );
 
 if ( ! function_exists( 'lifesites2021_header_style' ) ) :
 	/**

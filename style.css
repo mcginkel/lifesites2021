@@ -871,6 +871,13 @@ main {
     margin-right: -3em;
 }
 
+.no-margin-bottom {
+	margin-bottom: 0em;
+}
+.no-margin-top {
+	margin-top: 0em;
+}
+
 @media screen and (min-width: 1280px) {
 }
 
@@ -919,7 +926,12 @@ main {
 }
 .wp-block-cover img {
 	object-fit: cover;
-	
+	width: unset;
+}
+.wp-block-cover div {
+	bottom: 0px;
+	position: absolute;
+	margin: 0 2em;
 }
 
 

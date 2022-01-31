@@ -32,7 +32,7 @@ function lifesites2021_customize_register( $wp_customize ) {
 		);
 	}
 }
-add_action( 'customize_register', 'lifesites2021_customize_register' );
+//add_action( 'customize_register', 'lifesites2021_customize_register' );
 
 /**
  * Render the site title for the selective refresh partial.
@@ -58,4 +58,4 @@ function lifesites2021_customize_partial_blogdescription() {
 function lifesites2021_customize_preview_js() {
 	wp_enqueue_script( 'lifesites2021-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), _S_VERSION, true );
 }
-add_action( 'customize_preview_init', 'lifesites2021_customize_preview_js' );
+//add_action( 'customize_preview_init', 'lifesites2021_customize_preview_js' );
