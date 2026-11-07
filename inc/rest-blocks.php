@@ -20,6 +20,8 @@
  * @package LifeSites2021
  */
 
+defined( 'ABSPATH' ) || exit;
+
 add_action(
 	'rest_api_init',
 	function () {

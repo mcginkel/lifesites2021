@@ -15,6 +15,8 @@
  * @package LifeSites2021
  */
 
+defined( 'ABSPATH' ) || exit;
+
 add_filter(
 	'tribe_rest_event_data',
 	function ( $data ) {

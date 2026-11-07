@@ -1,0 +1,134 @@
+/*
+ * Block editor styles for LifeSites2021.
+ *
+ * Goal: the editing canvas looks like the Angular app (life-frontend,
+ * src/global.scss), so editors see roughly what visitors get.
+ * Loaded with add_editor_style(); WordPress scopes every rule to the
+ * editor canvas (.editor-styles-wrapper), so this never touches wp-admin
+ * chrome or the public site.
+ *
+ * Values mirrored from life-frontend/src/global.scss:
+ *   content width 1020px, side padding 30px, DM Sans,
+ *   h1 2rem / h2 1.125rem / h3 1.25rem, weight 600, links inherit color.
+ */
+
+:root {
+	--life-red: #fb5045;
+	--life-yellow: #ffd559;
+	--life-green: #166772;
+	--life-content-width: 1020px;
+	--life-gutter: 30px;
+}
+
+body {
+	font-family: "DM Sans", sans-serif;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #000;
+	background: #fff;
+}
+
+/* Content column like the app: centred, max 1020px, 30px gutters. */
+.wp-block {
+	max-width: var(--life-content-width);
+}
+
+.editor-post-title,
+.wp-block-post-title {
+	font-family: "DM Sans", sans-serif;
+	font-weight: 600;
+	font-size: 2rem;
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+
+p,
+h1, h2, h3, h4, h5, h6 {
+	padding-left: var(--life-gutter);
+	padding-right: var(--life-gutter);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "DM Sans", sans-serif;
+	font-weight: 600;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.125rem; }
+h3 { font-size: 1.25rem; padding-bottom: 0; }
+
+p {
+	padding-top: 5px;
+	padding-bottom: 20px;
+	font-size: 1rem;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+/* Separator: thin line at 30% opacity, as .life-separator in the app. */
+.wp-block-separator {
+	border: 0;
+	border-bottom: 1px solid currentColor;
+	opacity: 0.3;
+	margin-left: var(--life-gutter);
+	margin-right: var(--life-gutter);
+}
+
+/* Quote / pull quote: red, larger, max 800px (.life-quote / .life-pull-quote). */
+.wp-block-quote,
+.wp-block-pullquote {
+	color: var(--life-red);
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 0;
+}
+
+.wp-block-quote p,
+.wp-block-pullquote p {
+	font-size: 1.5rem;
+	padding: 20px 0;
+}
+
+/* Columns stack below 670px, like .life-columns. */
+@media only screen and (max-width: 670px) {
+	.wp-block-columns {
+		flex-direction: column;
+	}
+}
+
+/* Palette classes as WordPress generates them for the theme's slugs. */
+.has-life-red-fb-5045-color { color: var(--life-red); }
+.has-life-green-166772-color { color: var(--life-green); }
+.has-life-yellow-ffd-559-color { color: var(--life-yellow); }
+.has-life-black-000000-color { color: #000; }
+.has-life-white-ffffff-color { color: #fff; }
+.has-life-red-fb-5045-background-color { background-color: var(--life-red); }
+.has-life-green-166772-background-color { background-color: var(--life-green); }
+.has-life-yellow-ffd-559-background-color { background-color: var(--life-yellow); }
+.has-life-black-000000-background-color { background-color: #000; }
+.has-life-white-ffffff-background-color { background-color: #fff; }
+
+/*
+ * Page templates: the app paints the whole page in the template colour with
+ * white text (ParseHelper.getTemplate -> .life-background-color-*).
+ * js/editor-template-class.js puts the matching class on the canvas body.
+ */
+body.life-template-red {
+	background-color: var(--life-red);
+	color: #fff;
+}
+body.life-template-green {
+	background-color: var(--life-green);
+	color: #fff;
+}
+body.life-template-yellow {
+	background-color: var(--life-yellow);
+	color: #fff; /* matches the app; note: low contrast on yellow */
+}

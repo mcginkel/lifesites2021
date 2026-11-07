@@ -171,6 +171,37 @@ function lifesites2021_setup_theme_supported_features() {
 }
  
 add_action( 'after_setup_theme', 'lifesites2021_setup_theme_supported_features' );
+
+/**
+ * Block editor: make the editing canvas look like the Angular app.
+ * editor-style.css mirrors life-frontend/src/global.scss; WordPress scopes it
+ * to the editor canvas only.
+ */
+function lifesites2021_editor_styles() {
+	add_theme_support( 'editor-styles' );
+	add_editor_style(
+		array(
+			'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap',
+			'editor-style.css',
+		)
+	);
+}
+add_action( 'after_setup_theme', 'lifesites2021_editor_styles' );
+
+/**
+ * Block editor: colour the canvas for the red/green/yellow page templates.
+ */
+function lifesites2021_editor_assets() {
+	wp_enqueue_script(
+		'lifesites2021-editor-template-class',
+		get_template_directory_uri() . '/js/editor-template-class.js',
+		array( 'wp-data', 'wp-dom-ready', 'wp-editor' ),
+		_S_VERSION,
+		true
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'lifesites2021_editor_assets' );
+
 /**
  * Enqueue scripts and styles.
  */
