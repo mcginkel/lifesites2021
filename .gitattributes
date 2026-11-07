@@ -8,3 +8,4 @@ README.md       export-ignore
 phpcs.xml.dist  export-ignore
 composer.json   export-ignore
 package.json    export-ignore
+docs            export-ignore
