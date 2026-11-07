@@ -232,6 +232,11 @@ if ( ! function_exists('write_log')) {
 require get_template_directory() . '/blocks/child-pages.php';
 
 /**
+ * REST API: raw block markup for the Angular frontend.
+ */
+require get_template_directory() . '/inc/rest-blocks.php';
+
+/**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
