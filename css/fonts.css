@@ -1,0 +1,55 @@
+/*
+ * DM Sans, the same static files the Angular app serves
+ * (life-frontend/src/assets/fonts/DM_Sans, v1, SIL Open Font License 1.1,
+ * see fonts/DM_Sans/OFL.txt). Google Fonts serves the newer variable DM Sans,
+ * whose letters are wider; these keep line breaks identical to the app.
+ * Only 400, 500 and 700 exist, as in the app: weight 600 renders as 700.
+ */
+
+@font-face {
+	font-family: "DM Sans";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("../fonts/DM_Sans/DMSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "DM Sans";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("../fonts/DM_Sans/DMSans-Italic.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "DM Sans";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("../fonts/DM_Sans/DMSans-Medium.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "DM Sans";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("../fonts/DM_Sans/DMSans-MediumItalic.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "DM Sans";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("../fonts/DM_Sans/DMSans-Bold.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "DM Sans";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("../fonts/DM_Sans/DMSans-BoldItalic.ttf") format("truetype");
+}

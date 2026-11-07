@@ -2,11 +2,13 @@
  * App look for the WordPress front end.
  *
  * Loaded after style.css. Makes dev.lifesites.nl look like the Angular app
- * (lifesites.nl). Values mirror life-frontend/src/global.scss and the
- * life-header / life-footer components:
- *   DM Sans; content column 1020px with 30px gutters; full-bleed images,
- *   covers and groups; h1 2rem, h2 1.125rem, h3 1.25rem, weight 600;
- *   links inherit colour, bold, no underline, with " ➔" after them;
+ * (lifesites.nl). Values mirror the app's DEPLOYED stylesheet
+ * (styles.*.css on lifesites.nl, which is newer than global.scss in the
+ * frontend repo) plus Ionic's typography.css and the life-header /
+ * footer component styles:
+ *   DM Sans; line-height normal for text, 1.2 for headings; content column
+ *   1020px with 30px gutters; h1 2rem, h2 1.6rem, h3 1.25rem, weight 600;
+ *   strong 700; links inherit colour, bold, no underline, with " ➔";
  *   red quotes; header 80px logo; black footer in a 1020px column.
  */
 
@@ -31,7 +33,16 @@ textarea {
 
 body {
 	font-size: 16px;
-	line-height: 1.4;
+	line-height: normal;
+}
+
+/* Ionic normalize: strong is plain bold, also inside 600-weight headings. */
+.entry-content strong,
+.entry-content b,
+.entry-header strong,
+.site-footer strong,
+.site-footer b {
+	font-weight: 700;
 }
 
 .entry-content a,
@@ -65,6 +76,10 @@ body {
 	margin: 0 auto;
 	padding: 40px var(--life-gutter);
 	box-sizing: border-box;
+}
+
+@media only screen and (max-width: 870px) {
+	.site-header { padding: 20px 30px; }
 }
 
 .site-branding {
@@ -118,11 +133,17 @@ body {
 	object-fit: cover;
 }
 
+/* Without a featured image the app shows the title as a plain h1
+   (padding 10px 30px 5px), straight above the content. */
 .entry-header-text {
 	max-width: var(--life-width);
 	margin: 0 auto;
-	padding: 60px var(--life-gutter);
+	padding: 0 var(--life-gutter);
 	box-sizing: border-box;
+}
+
+.entry-header:not(.has-header-image) .entry-title {
+	padding-bottom: 5px;
 }
 
 .has-header-image .entry-header-text {
@@ -143,14 +164,21 @@ body {
 	color: inherit;
 }
 
+/* .life-image-text: h1 padding 10px 30px 0, h2 padding 0 30px 5px. */
 .entry-title {
+	padding-top: 10px;
 	font-size: 2rem;
 	line-height: 1.2;
 }
 
 .entry-subtitle {
-	font-size: 1.125rem;
+	padding-bottom: 5px;
+	font-size: 1.6rem;
 	line-height: 1.2;
+}
+
+@media only screen and (max-width: 670px) {
+	.entry-subtitle { font-size: 1.3em; }
 }
 
 @media only screen and (min-width: 870px) {
@@ -167,6 +195,11 @@ body {
 .entry-content {
 	margin: 0;
 	padding: 0 0 30px;
+}
+
+/* A coloured block at the end runs straight into the footer, as in the app. */
+.entry-content:has(> .has-background:last-child) {
+	padding-bottom: 0;
 }
 
 .entry-content p,
@@ -192,10 +225,7 @@ body {
 	padding-top: 5px;
 	padding-bottom: 20px;
 	font-size: 1rem;
-}
-
-.entry-content p:empty {
-	display: none;
+	line-height: normal;
 }
 
 .entry-content h1,
@@ -209,12 +239,78 @@ body {
 	margin-bottom: 0;
 	padding-top: 10px;
 	padding-bottom: 5px;
+	line-height: 1.2;
 	clear: none;
 }
 
+/* Lists keep the browser defaults in the app: margin 1em 0, indent 40px. */
+.entry-content ul,
+.entry-content ol,
+.entry-content .wp-block-group .wp-block-group__inner-container > :is(ul, ol) {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding-left: 40px;
+	padding-right: 0;
+}
+
+.entry-content li {
+	line-height: normal;
+}
+
 .entry-content h1 { font-size: 2rem; }
-.entry-content h2 { font-size: 1.125rem; }
+.entry-content h2 { font-size: 1.6rem; }
 .entry-content h3 { font-size: 1.25rem; padding-bottom: 0; }
+
+@media only screen and (max-width: 670px) {
+	.entry-content h2 { font-size: 1.3em; padding-top: 0; }
+	.entry-content h3 { font-size: 1.2em; padding-top: 0; }
+}
+
+/* Editor classes the app honours (Additional CSS class on a block). */
+.entry-content .no-padding p,
+.entry-content .no-padding h1,
+.entry-content .no-padding h2,
+.entry-content .no-padding h3,
+.entry-content .no-padding h4,
+.entry-content .no-padding h5,
+.entry-content .no-padding h6 {
+	padding: 0 !important;
+}
+
+.entry-content .no-margin > * {
+	margin: 0;
+}
+
+/* .padding-top sits on both the app's wrapper div and the block: 20px + 20px. */
+.entry-content .padding-top {
+	padding-top: 20px;
+}
+
+.entry-content > .padding-top:is(h1, h2, h3, h4, h5, h6, p) {
+	padding-top: 40px;
+}
+
+/* Font-size presets (has-medium-font-size …): the app turns the block's
+   fontSize attribute into a CSS keyword on a wrapper div (medium = 16px,
+   large = 18px), which rem-sized text ignores. Inline sizes it does keep.
+   Covers and carousels size their headings in em; see there. */
+.entry-content :not(.wp-block-cover__inner-container, .wp-block-cb-slide) > p[class*="-font-size"]:not([style*="font-size"]) { font-size: 1rem !important; }
+.entry-content :not(.wp-block-cover__inner-container, .wp-block-cb-slide) > h1[class*="-font-size"]:not([style*="font-size"]) { font-size: 2rem !important; }
+.entry-content :not(.wp-block-cover__inner-container, .wp-block-cb-slide) > h2[class*="-font-size"]:not([style*="font-size"]) { font-size: 1.6rem !important; }
+.entry-content :not(.wp-block-cover__inner-container, .wp-block-cb-slide) > h3[class*="-font-size"]:not([style*="font-size"]) { font-size: 1.25rem !important; }
+
+/* The last block gets 30px extra bottom padding inside its own background
+   (.bodyclass > life-html:last-child > div > div). */
+.entry-content > p.has-background:last-child { padding-bottom: 50px; }
+.entry-content > .wp-block-group.has-background:last-child { padding-bottom: 30px; }
+
+/* A top-level heading or paragraph with a background colour: the app puts the
+   colour on its full-width wrapper; the text stays in the 1020px column. */
+.entry-content > .has-background:is(h1, h2, h3, h4, h5, h6, p) {
+	max-width: none;
+	padding-left: max(var(--life-gutter), calc(50% - 480px));
+	padding-right: max(var(--life-gutter), calc(50% - 480px));
+}
 
 /* Full-bleed images, like .life-image */
 .entry-content > .wp-block-image,
@@ -230,8 +326,12 @@ body {
 }
 
 /* ---------- Cover ---------- */
+/* The app renders a cover like the page header (.life-image-text): image at
+   full width up to 60vh, h1 4em / h2 2.5em in white, editor size presets
+   ignored. Height assumes 3:2 photos, as on the site. */
 .entry-content .wp-block-cover {
 	width: 100%;
+	min-height: min(60vh, 66.67vw) !important;
 	max-height: 60vh;
 	margin: 0;
 	padding: 0;
@@ -250,25 +350,31 @@ body {
 	color: #fff;
 }
 
-/* Cover headings are as large as the page header title (.life-image-text). */
-.entry-content .wp-block-cover h1 { font-size: 2rem; padding-bottom: 0; }
-.entry-content .wp-block-cover h2 { font-size: 1.125rem; padding-top: 0; }
+/* "large" headings sit in an 18px wrapper in the app, so their em sizes grow. */
+.entry-content .wp-block-cover h1 { font-size: 2rem !important; padding-bottom: 0; }
+.entry-content .wp-block-cover h2 { font-size: 1.6rem !important; padding-top: 0; }
+
+@media only screen and (max-width: 670px) {
+	.entry-content .wp-block-cover h2 { font-size: 1.3em !important; }
+}
 
 @media only screen and (min-width: 870px) {
-	.entry-content .wp-block-cover h1 { font-size: 3em; }
-	.entry-content .wp-block-cover h2 { font-size: 1.85em; }
+	.entry-content .wp-block-cover h1 { font-size: 3em !important; }
+	.entry-content .wp-block-cover h1.has-large-font-size { font-size: 54px !important; }
+	.entry-content .wp-block-cover h2 { font-size: 1.85em !important; }
 }
 
 @media only screen and (min-width: 1020px) {
-	.entry-content .wp-block-cover h1 { font-size: 4em; }
-	.entry-content .wp-block-cover h2 { font-size: 2.5em; }
+	.entry-content .wp-block-cover h1 { font-size: 4em !important; }
+	.entry-content .wp-block-cover h1.has-large-font-size { font-size: 72px !important; }
+	.entry-content .wp-block-cover h2 { font-size: 2.5em !important; }
 }
 
-/* ---------- Carousel (Carousel Slider Block): full width like the app ---------- */
+/* ---------- Carousel (Carousel Slider Block) ---------- */
 .entry-content .wp-block-cb-carousel {
 	width: 100%;
 	max-width: none;
-	margin: 0;
+	margin: 0 !important;
 }
 
 .entry-content .wp-block-cb-carousel .wp-block-image,
@@ -276,18 +382,200 @@ body {
 	margin: 0;
 }
 
-/* Single-slide carousels show the image edge to edge, max 60vh (.life-caroussel-slide img). */
-.entry-content .wp-block-cb-carousel.cb-single-slide img {
+/* Single slide (.life-caroussel): photo edge to edge (max 60vh); the slide's
+   text in white over the bottom of the photo, above bar-shaped dots. The grid
+   stacks the text rows over the photo, which spans all rows. */
+.entry-content .cb-single-slide .wp-block-cb-slide {
+	display: grid !important;
+	grid-template-columns: 100%;
+	grid-template-rows: 1fr repeat(4, auto) 43px; /* 43 = 10 + 3px bars + 30 */
+	padding: 0;
+	color: #fff;
+}
+
+.entry-content .cb-single-slide .wp-block-cb-slide > * {
+	grid-column: 1;
+	position: relative;
+	z-index: 1;
+	width: 100%; /* a grid item with margin:auto would shrink to its text */
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: left;
+}
+
+.entry-content .cb-single-slide .wp-block-cb-slide > :first-child { grid-row: 1 / -1; z-index: 0; }
+.entry-content .cb-single-slide .wp-block-cb-slide > :nth-child(2) { grid-row: 2; }
+.entry-content .cb-single-slide .wp-block-cb-slide > :nth-child(3) { grid-row: 3; }
+.entry-content .cb-single-slide .wp-block-cb-slide > :nth-child(4) { grid-row: 4; }
+.entry-content .cb-single-slide .wp-block-cb-slide > :nth-child(5) { grid-row: 5; }
+
+.entry-content .cb-single-slide img {
 	display: block;
 	width: 100%;
 	max-height: 60vh;
 	object-fit: cover;
 }
 
+.entry-content .cb-single-slide .wp-block-cb-slide :is(h1, h2, h3, h4, p) {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	white-space: nowrap;
+}
+
+.entry-content .cb-single-slide .wp-block-cb-slide p { white-space: pre-wrap; }
+.entry-content .cb-single-slide .wp-block-cb-slide h1 { font-size: 4em !important; }
+.entry-content .cb-single-slide .wp-block-cb-slide h2 { font-size: 2.5em !important; }
+
+.entry-content .cb-single-slide .slick-dots {
+	position: absolute;
+	bottom: 30px;
+	left: 0;
+	right: 0;
+	z-index: 2;
+	display: flex !important;
+	justify-content: flex-start;
+	max-width: var(--life-width);
+	margin: 0 auto;
+	padding: 0 20px;
+	list-style: none;
+	box-sizing: border-box;
+}
+
+.entry-content .cb-single-slide .slick-dots li {
+	flex: 0 0 8px;
+	width: 8px;
+	height: 8px;
+	margin: 0 8px;
+	padding: 0;
+	border-radius: 50%;
+	background: #fff;
+	opacity: 0.5;
+}
+
+.entry-content .cb-single-slide .slick-dots li.slick-active {
+	opacity: 1;
+}
+
+.entry-content .cb-single-slide .slick-dots button {
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	font-size: 0;
+	cursor: pointer;
+}
+
+.entry-content .cb-single-slide .slick-dots button::before {
+	display: none;
+}
+
+@media only screen and (min-width: 870px) {
+	.entry-content .cb-single-slide .slick-dots li {
+		flex: 1 1 0;
+		height: 3px;
+		margin: 0 10px;
+		border-radius: 0;
+	}
+}
+
+/* Arrows: 30px wide, full height, "<" / ">" in Ionic's light colour. */
+.entry-content .cb-single-slide .slick-arrow {
+	position: absolute;
+	top: 0;
+	z-index: 2;
+	width: 30px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	font-size: 0;
+	transform: none;
+	cursor: pointer;
+}
+
+.entry-content .cb-single-slide .slick-prev { left: 0; }
+.entry-content .cb-single-slide .slick-next { right: 0; }
+
+.entry-content .cb-single-slide .slick-arrow::before {
+	font-family: inherit;
+	font-size: 48px;
+	font-weight: 500;
+	color: #f4f5f8;
+	opacity: 1;
+}
+
+.entry-content .cb-single-slide .slick-prev::before { content: "<"; }
+.entry-content .cb-single-slide .slick-next::before { content: ">"; }
+
+/* Multi slide (.life-caroussel-multi): a row of 330px cards in the 1020px
+   column, running on to the right edge. inc/carousel.php switches slick to
+   variable width and adds .cb-cards. Card text: headings padding 20px 20px 0,
+   each paragraph in a 20px padded box. */
+.entry-content .wp-block-cb-carousel:not(.cb-single-slide) {
+	padding: 20px 0 20px 20px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.entry-content .cb-cards .slick-list {
+	max-width: var(--life-width);
+	margin: 0 auto;
+	overflow: visible;
+}
+
+.entry-content .cb-cards .wp-block-cb-slide {
+	width: 330px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.entry-content .cb-cards .slick-dots,
+.entry-content .cb-cards .slick-arrow {
+	display: none !important;
+}
+
+.entry-content .wp-block-cb-carousel:not(.cb-single-slide) .wp-block-cb-slide img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.entry-content .wp-block-cb-carousel:not(.cb-single-slide) .wp-block-cb-slide h1,
+.entry-content .wp-block-cb-carousel:not(.cb-single-slide) .wp-block-cb-slide h2,
+.entry-content .wp-block-cb-carousel:not(.cb-single-slide) .wp-block-cb-slide h3,
+.entry-content .wp-block-cb-carousel:not(.cb-single-slide) .wp-block-cb-slide h4 {
+	max-width: 100%;
+	margin: 0;
+	padding: 20px 20px 0;
+}
+
+.entry-content .wp-block-cb-carousel:not(.cb-single-slide) .wp-block-cb-slide p {
+	max-width: 100%;
+	margin: 0;
+	padding: 20px;
+	white-space: pre-wrap;
+}
+
+/* On phones the app sizes card headings in em of the swiper slide (18px). */
+@media only screen and (max-width: 670px) {
+	.entry-content .wp-block-cb-carousel:not(.cb-single-slide) .wp-block-cb-slide h2 { font-size: 23.4px !important; }
+	.entry-content .wp-block-cb-carousel:not(.cb-single-slide) .wp-block-cb-slide h3 { font-size: 21.6px !important; }
+}
+
 /* ---------- Groups (full width background, constrained content) ---------- */
+/* .life-group: padding 10px 0; headings padding 20px; paragraphs 10px 20px. */
 .entry-content .wp-block-group {
 	margin: 0;
 	padding: 10px 0;
+}
+
+/* A group that only holds a carousel adds no padding: in the app the carousel
+   takes the group's place and carries its background. */
+.entry-content .wp-block-group:has(> .wp-block-group__inner-container > .wp-block-cb-carousel:only-child) {
+	padding: 0;
 }
 
 .entry-content .wp-block-group > .wp-block-group__inner-container > *,
@@ -296,17 +584,53 @@ body {
 	margin-bottom: 0;
 }
 
+.entry-content .wp-block-group h1,
+.entry-content .wp-block-group h2,
+.entry-content .wp-block-group h3,
+.entry-content .wp-block-group h4,
+.entry-content .wp-block-group h5,
+.entry-content .wp-block-group h6 {
+	padding: 20px;
+}
+
+/* Specificity above the column rule, as in the app (.life-group .life-paragraph p). */
+.entry-content .wp-block-group .wp-block-column p,
+.entry-content .wp-block-group p {
+	padding: 10px 20px;
+}
+
 /* ---------- Columns ---------- */
+/* .life-columns: flex, no gap; only the first column has margin-right 20px. */
 .entry-content .wp-block-columns {
 	max-width: var(--life-width);
 	margin: 0 auto;
 	padding: 0 var(--life-gutter);
 	box-sizing: border-box;
-	gap: 20px;
+	gap: 0;
 }
 
 .entry-content .wp-block-column {
+	display: flex;
+	flex-direction: column;
 	padding: 20px 0;
+}
+
+/* The app wraps every block in a div, so blocks stretch across the column
+   instead of being centred by their own margin:auto. */
+.entry-content .wp-block-column > * {
+	align-self: stretch;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.entry-content .wp-block-column:first-child {
+	margin-right: 20px;
+}
+
+/* Columns nested in a column get no extra gutter (.life-columns .life-content). */
+.entry-content .wp-block-column .wp-block-columns {
+	max-width: none;
+	padding: 0;
 }
 
 .entry-content .wp-block-column > * {
@@ -339,17 +663,11 @@ body {
 	.entry-content .wp-block-columns {
 		flex-direction: column;
 	}
-}
 
-/* Cards: a coloured group inside a column keeps its padding. */
-.entry-content .wp-block-column .wp-block-group.has-background {
-	padding: 20px;
-}
-
-.entry-content .wp-block-column .wp-block-group.has-background p,
-.entry-content .wp-block-column .wp-block-group.has-background h2,
-.entry-content .wp-block-column .wp-block-group.has-background h3 {
-	padding: 0 0 10px;
+	.entry-content .wp-block-column {
+		width: 100% !important;
+		flex-basis: auto !important;
+	}
 }
 
 /* ---------- Quote / pull quote ---------- */
@@ -399,10 +717,17 @@ body.page-template-template-yellow-page main {
 	box-sizing: border-box;
 }
 
+/* .footer: four .footer__info columns, flex-basis 25%, padding-right 20px. */
 .site-footer .wp-block-columns {
 	margin: 0;
 	padding: 0;
-	gap: 20px;
+	gap: 0;
+}
+
+.site-footer .wp-block-column {
+	flex: 0 0 25% !important;
+	padding-right: 20px;
+	box-sizing: border-box;
 }
 
 .site-footer p,
@@ -413,7 +738,26 @@ body.page-template-template-yellow-page main {
 	margin: 0 0 1em;
 	padding: 0;
 	font-size: 1rem;
+	line-height: normal;
 	color: #fff;
+}
+
+/* .footer__info__header: margin 1em 0. */
+.site-footer .wp-block-column > :first-child {
+	margin-top: 1em;
+}
+
+.site-footer .site-info > p:empty {
+	display: none;
+}
+
+@media only screen and (max-width: 1020px) {
+	.site-footer .wp-block-columns { flex-wrap: wrap; }
+	.site-footer .wp-block-column { flex-basis: 50% !important; }
+}
+
+@media only screen and (max-width: 670px) {
+	.site-footer .wp-block-column { flex-basis: 100% !important; }
 }
 
 .site-footer strong,
@@ -424,7 +768,10 @@ body.page-template-template-yellow-page main {
 	font-weight: 600;
 }
 
+/* The app's footer links (and the e-mail address) are plain red, bold. */
 .site-footer a,
-.site-footer a:visited {
-	color: var(--life-red);
+.site-footer a:visited,
+.site-footer .has-vivid-red-color {
+	color: #f00 !important;
+	font-weight: 600;
 }

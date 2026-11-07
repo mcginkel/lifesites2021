@@ -181,7 +181,7 @@ function lifesites2021_editor_styles() {
 	add_theme_support( 'editor-styles' );
 	add_editor_style(
 		array(
-			'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap',
+			'css/fonts.css',
 			'editor-style.css',
 		)
 	);
@@ -206,7 +206,9 @@ add_action( 'enqueue_block_editor_assets', 'lifesites2021_editor_assets' );
  * Enqueue scripts and styles.
  */
 function lifesites2021_scripts() {
-	wp_enqueue_style( 'lifesites2021-style', get_stylesheet_uri(), array(), _S_VERSION );
+	// DM Sans from the theme: the same files as the app (no Google Fonts request).
+	wp_enqueue_style( 'lifesites2021-fonts', get_template_directory_uri() . '/css/fonts.css', array(), _S_VERSION );
+	wp_enqueue_style( 'lifesites2021-style', get_stylesheet_uri(), array( 'lifesites2021-fonts' ), _S_VERSION );
 	// Front end styled like the Angular app (lifesites.nl); overrides style.css.
 	wp_enqueue_style( 'lifesites2021-app-look', get_template_directory_uri() . '/css/app-look.css', array( 'lifesites2021-style' ), _S_VERSION );
 
@@ -222,12 +224,6 @@ function lifesites2021_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'lifesites2021_scripts' );
-
-function wpb_add_google_fonts() {
-	wp_enqueue_style( 'wpb-google-fonts', 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap', false );
-}
-	
-add_action( 'wp_enqueue_scripts', 'wpb_add_google_fonts' );
 
 /**
  * Custom template tags for this theme.
@@ -262,5 +258,10 @@ require get_template_directory() . '/inc/rest-blocks.php';
  * REST API: The Events Calendar descriptions in the format the Angular frontend expects.
  */
 require get_template_directory() . '/inc/rest-events.php';
+
+/**
+ * Carousel Slider Block: multi-slide carousels as fixed-width cards, like the app.
+ */
+require get_template_directory() . '/inc/carousel.php';
 
 
