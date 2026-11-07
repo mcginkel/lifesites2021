@@ -237,6 +237,11 @@ require get_template_directory() . '/blocks/child-pages.php';
 require get_template_directory() . '/inc/rest-blocks.php';
 
 /**
+ * REST API: The Events Calendar descriptions in the format the Angular frontend expects.
+ */
+require get_template_directory() . '/inc/rest-events.php';
+
+/**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
