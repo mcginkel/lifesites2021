@@ -1,0 +1,430 @@
+/*
+ * App look for the WordPress front end.
+ *
+ * Loaded after style.css. Makes dev.lifesites.nl look like the Angular app
+ * (lifesites.nl). Values mirror life-frontend/src/global.scss and the
+ * life-header / life-footer components:
+ *   DM Sans; content column 1020px with 30px gutters; full-bleed images,
+ *   covers and groups; h1 2rem, h2 1.125rem, h3 1.25rem, weight 600;
+ *   links inherit colour, bold, no underline, with " ➔" after them;
+ *   red quotes; header 80px logo; black footer in a 1020px column.
+ */
+
+:root {
+	--life-red: #fb5045;
+	--life-yellow: #ffd559;
+	--life-green: #166772;
+	--life-width: 1020px;
+	--life-gutter: 30px;
+}
+
+/* ---------- Base ---------- */
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+	font-family: "DM Sans", sans-serif;
+	color: #000;
+}
+
+body {
+	font-size: 16px;
+	line-height: 1.4;
+}
+
+.entry-content a,
+.entry-content a:visited,
+.site-footer a,
+.site-footer a:visited {
+	color: inherit;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.entry-content a:hover,
+.site-footer a:hover {
+	color: var(--life-red);
+}
+
+/* The app appends an arrow to links in paragraphs and headings. */
+.entry-content p a::after,
+.entry-content h1 a::after,
+.entry-content h2 a::after,
+.entry-content h3 a::after,
+.entry-content h4 a::after,
+.site-footer a::after {
+	content: " \2794";
+}
+
+/* ---------- Header ---------- */
+.site-header {
+	height: auto;
+	max-width: var(--life-width);
+	margin: 0 auto;
+	padding: 40px var(--life-gutter);
+	box-sizing: border-box;
+}
+
+.site-branding {
+	margin-left: 0;
+}
+
+.site-menu {
+	margin-right: 0;
+}
+
+.main-navigation li {
+	margin: 0 0 0 20px;
+}
+
+.menu-item a {
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 20px;
+}
+
+.main-navigation ul ul {
+	border: 0;
+	padding: 10px 0;
+	box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px;
+}
+
+.main-navigation ul ul li {
+	margin: 0;
+}
+
+.main-navigation ul ul a {
+	padding: 0 20px;
+	line-height: 30px;
+}
+
+/* ---------- Page header (featured image + title) ---------- */
+.entry-header {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.entry-header .post-thumbnail {
+	margin: 0;
+}
+
+.entry-header .post-thumbnail img {
+	display: block;
+	width: 100%;
+	max-height: 60vh;
+	object-fit: cover;
+}
+
+.entry-header-text {
+	max-width: var(--life-width);
+	margin: 0 auto;
+	padding: 60px var(--life-gutter);
+	box-sizing: border-box;
+}
+
+.has-header-image .entry-header-text {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 20px;
+	padding-top: 0;
+	padding-bottom: 0;
+	color: #fff;
+}
+
+.entry-title,
+.entry-subtitle {
+	margin: 0;
+	padding: 0;
+	font-weight: 600;
+	color: inherit;
+}
+
+.entry-title {
+	font-size: 2rem;
+	line-height: 1.2;
+}
+
+.entry-subtitle {
+	font-size: 1.125rem;
+	line-height: 1.2;
+}
+
+@media only screen and (min-width: 870px) {
+	.has-header-image .entry-title { font-size: 3em; }
+	.has-header-image .entry-subtitle { font-size: 1.85em; }
+}
+
+@media only screen and (min-width: 1020px) {
+	.has-header-image .entry-title { font-size: 4em; }
+	.has-header-image .entry-subtitle { font-size: 2.5em; }
+}
+
+/* ---------- Content column ---------- */
+.entry-content {
+	margin: 0;
+	padding: 0 0 30px;
+}
+
+.entry-content p,
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6,
+.entry-content ul,
+.entry-content ol {
+	max-width: var(--life-width);
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: var(--life-gutter);
+	padding-right: var(--life-gutter);
+	box-sizing: border-box;
+}
+
+.entry-content p {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	font-size: 1rem;
+}
+
+.entry-content p:empty {
+	display: none;
+}
+
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+	font-weight: 600;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	clear: none;
+}
+
+.entry-content h1 { font-size: 2rem; }
+.entry-content h2 { font-size: 1.125rem; }
+.entry-content h3 { font-size: 1.25rem; padding-bottom: 0; }
+
+/* Full-bleed images, like .life-image */
+.entry-content > .wp-block-image,
+.entry-content > figure.wp-block-image {
+	margin: 0;
+}
+
+.entry-content > .wp-block-image img {
+	display: block;
+	width: 100%;
+	max-height: 60vh;
+	object-fit: cover;
+}
+
+/* ---------- Cover ---------- */
+.entry-content .wp-block-cover {
+	width: 100%;
+	max-height: 60vh;
+	margin: 0;
+	padding: 0;
+	align-items: flex-end;
+}
+
+.entry-content .wp-block-cover div {
+	position: static;
+	margin: 0;
+}
+
+.entry-content .wp-block-cover .wp-block-cover__inner-container {
+	width: 100%;
+	max-width: var(--life-width);
+	margin: 0 auto 20px;
+	color: #fff;
+}
+
+/* Cover headings are as large as the page header title (.life-image-text). */
+.entry-content .wp-block-cover h1 { font-size: 2rem; padding-bottom: 0; }
+.entry-content .wp-block-cover h2 { font-size: 1.125rem; padding-top: 0; }
+
+@media only screen and (min-width: 870px) {
+	.entry-content .wp-block-cover h1 { font-size: 3em; }
+	.entry-content .wp-block-cover h2 { font-size: 1.85em; }
+}
+
+@media only screen and (min-width: 1020px) {
+	.entry-content .wp-block-cover h1 { font-size: 4em; }
+	.entry-content .wp-block-cover h2 { font-size: 2.5em; }
+}
+
+/* ---------- Carousel (Carousel Slider Block): full width like the app ---------- */
+.entry-content .wp-block-cb-carousel {
+	width: 100%;
+	max-width: none;
+	margin: 0;
+}
+
+.entry-content .wp-block-cb-carousel .wp-block-image,
+.entry-content .wp-block-cb-carousel figure {
+	margin: 0;
+}
+
+/* Single-slide carousels show the image edge to edge, max 60vh (.life-caroussel-slide img). */
+.entry-content .wp-block-cb-carousel.cb-single-slide img {
+	display: block;
+	width: 100%;
+	max-height: 60vh;
+	object-fit: cover;
+}
+
+/* ---------- Groups (full width background, constrained content) ---------- */
+.entry-content .wp-block-group {
+	margin: 0;
+	padding: 10px 0;
+}
+
+.entry-content .wp-block-group > .wp-block-group__inner-container > *,
+.entry-content .wp-block-group > * {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* ---------- Columns ---------- */
+.entry-content .wp-block-columns {
+	max-width: var(--life-width);
+	margin: 0 auto;
+	padding: 0 var(--life-gutter);
+	box-sizing: border-box;
+	gap: 20px;
+}
+
+.entry-content .wp-block-column {
+	padding: 20px 0;
+}
+
+.entry-content .wp-block-column > * {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.entry-content .wp-block-column p,
+.entry-content .wp-block-column h1,
+.entry-content .wp-block-column h2,
+.entry-content .wp-block-column h3,
+.entry-content .wp-block-column h4 {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+/* .life-column p { padding: 0 } in the app */
+.entry-content .wp-block-column p {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.entry-content .wp-block-column .wp-block-image img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+@media only screen and (max-width: 670px) {
+	.entry-content .wp-block-columns {
+		flex-direction: column;
+	}
+}
+
+/* Cards: a coloured group inside a column keeps its padding. */
+.entry-content .wp-block-column .wp-block-group.has-background {
+	padding: 20px;
+}
+
+.entry-content .wp-block-column .wp-block-group.has-background p,
+.entry-content .wp-block-column .wp-block-group.has-background h2,
+.entry-content .wp-block-column .wp-block-group.has-background h3 {
+	padding: 0 0 10px;
+}
+
+/* ---------- Quote / pull quote ---------- */
+.entry-content .wp-block-quote,
+.entry-content .wp-block-pullquote {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 0 var(--life-gutter);
+	border: 0;
+	color: var(--life-red);
+	text-align: left;
+}
+
+.entry-content .wp-block-quote p,
+.entry-content .wp-block-pullquote p {
+	padding: 20px 0;
+	font-size: 1.5rem;
+	font-style: normal;
+}
+
+/* ---------- Separator ---------- */
+.entry-content .wp-block-separator {
+	max-width: calc(var(--life-width) - 2 * var(--life-gutter));
+	margin: 0 auto;
+	border: 0;
+	border-bottom: 1px solid currentColor;
+	opacity: 0.3;
+}
+
+/* ---------- Page templates (whole page in colour, like the app) ---------- */
+body.page-template-template-red-page main,
+body.page-template-template-green-page main,
+body.page-template-template-yellow-page main {
+	padding-top: 30px;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+	background-color: #000;
+	color: #fff;
+}
+
+.site-footer .site-info {
+	max-width: var(--life-width);
+	margin: 0 auto;
+	padding: 40px var(--life-gutter);
+	box-sizing: border-box;
+}
+
+.site-footer .wp-block-columns {
+	margin: 0;
+	padding: 0;
+	gap: 20px;
+}
+
+.site-footer p,
+.site-footer h1,
+.site-footer h2,
+.site-footer h3,
+.site-footer h4 {
+	margin: 0 0 1em;
+	padding: 0;
+	font-size: 1rem;
+	color: #fff;
+}
+
+.site-footer strong,
+.site-footer h1,
+.site-footer h2,
+.site-footer h3,
+.site-footer h4 {
+	font-weight: 600;
+}
+
+.site-footer a,
+.site-footer a:visited {
+	color: var(--life-red);
+}

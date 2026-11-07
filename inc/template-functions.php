@@ -35,3 +35,23 @@ function lifesites2021_pingback_header() {
 	}
 }
 //add_action( 'wp_head', 'lifesites2021_pingback_header' );
+
+/**
+ * Split a page title into title and subtitle.
+ *
+ * Editors write titles like "Nieuw hier?<br/><h2>Van harte welkom</h2>":
+ * the part before <br> is the title, the rest the subtitle. The Angular app
+ * shows both on the header image; echoing the raw title would nest an <h2>
+ * inside the <h1>, which browsers pull out of the header.
+ *
+ * @param int|WP_Post|null $post Post; defaults to the current post.
+ * @return string[] { 0: title, 1: subtitle } as plain text (tags stripped).
+ */
+function lifesites2021_title_parts( $post = null ) {
+	$parts = preg_split( '/<br\s*\/?>/i', get_the_title( $post ), 2 );
+
+	return array(
+		trim( wp_strip_all_tags( $parts[0] ) ),
+		isset( $parts[1] ) ? trim( wp_strip_all_tags( $parts[1] ) ) : '',
+	);
+}

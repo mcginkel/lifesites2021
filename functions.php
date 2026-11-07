@@ -207,6 +207,8 @@ add_action( 'enqueue_block_editor_assets', 'lifesites2021_editor_assets' );
  */
 function lifesites2021_scripts() {
 	wp_enqueue_style( 'lifesites2021-style', get_stylesheet_uri(), array(), _S_VERSION );
+	// Front end styled like the Angular app (lifesites.nl); overrides style.css.
+	wp_enqueue_style( 'lifesites2021-app-look', get_template_directory_uri() . '/css/app-look.css', array( 'lifesites2021-style' ), _S_VERSION );
 
 	wp_enqueue_script( 'lifesites2021-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
@@ -222,7 +224,7 @@ function lifesites2021_scripts() {
 add_action( 'wp_enqueue_scripts', 'lifesites2021_scripts' );
 
 function wpb_add_google_fonts() {
-	wp_enqueue_style( 'wpb-google-fonts', 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap', false );
+	wp_enqueue_style( 'wpb-google-fonts', 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap', false );
 }
 	
 add_action( 'wp_enqueue_scripts', 'wpb_add_google_fonts' );

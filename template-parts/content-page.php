@@ -10,13 +10,21 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-	<?php // check if the post or page has a Featured Image assigned to it.
+	<?php list( $lifesites2021_title, $lifesites2021_subtitle ) = lifesites2021_title_parts(); ?>
+	<header class="entry-header<?php echo has_post_thumbnail() ? ' has-header-image' : ''; ?>">
+		<?php
 		if ( has_post_thumbnail() ) {
 			lifesites2021_post_thumbnail();
-			the_title( '<h1 class="entry-title entry-title-inside-header-image">', '</h1>' );
-		} else {
-			the_title( '<h1 class="entry-title">', '</h1>' ); } ?>
+		}
+		if ( '' !== $lifesites2021_title ) :
+			?>
+			<div class="entry-header-text">
+				<h1 class="entry-title"><?php echo $lifesites2021_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- tags stripped in lifesites2021_title_parts(). ?></h1>
+				<?php if ( '' !== $lifesites2021_subtitle ) : ?>
+					<p class="entry-subtitle"><?php echo $lifesites2021_subtitle; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
 	</header><!-- .entry-header -->
 
 
