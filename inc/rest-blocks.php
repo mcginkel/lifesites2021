@@ -31,6 +31,11 @@ add_action(
 				'blocks',
 				array(
 					'get_callback' => function ( array $post ) {
+						// Never leak the content of password-protected posts:
+						// content.rendered is hidden for them, so 'blocks' must be too.
+						if ( post_password_required( $post['id'] ) ) {
+							return '';
+						}
 						return $post['content']['raw'] ?? '';
 					},
 					'schema'       => array(
