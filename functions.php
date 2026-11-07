@@ -207,7 +207,6 @@ add_action( 'enqueue_block_editor_assets', 'lifesites2021_editor_assets' );
  */
 function lifesites2021_scripts() {
 	wp_enqueue_style( 'lifesites2021-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'lifesites2021-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'lifesites2021-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
@@ -229,11 +228,6 @@ function wpb_add_google_fonts() {
 add_action( 'wp_enqueue_scripts', 'wpb_add_google_fonts' );
 
 /**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
@@ -242,11 +236,6 @@ require get_template_directory() . '/inc/template-tags.php';
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Customizer additions.
- */
-//require get_template_directory() . '/inc/customizer.php';
 
 if ( ! function_exists('write_log')) {
 	function write_log ( $log )  {
@@ -271,12 +260,5 @@ require get_template_directory() . '/inc/rest-blocks.php';
  * REST API: The Events Calendar descriptions in the format the Angular frontend expects.
  */
 require get_template_directory() . '/inc/rest-events.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
 
 
