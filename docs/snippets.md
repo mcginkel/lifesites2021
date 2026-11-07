@@ -36,7 +36,7 @@ verhaalpagina verwijst. Overwegingen:
 2. #1–#5 en #7–#8: verwijderen (Trash).
 3. #6: gebruikt? → naar thema (zie boven), anders verwijderen.
 4. Als de lijst leeg is: plugin Code Snippets deactiveren en verwijderen.
-5. Na de volgende thema-deploy de REST-checks uit `DEPLOY.md` draaien.
+5. Na de volgende thema-deploy de REST-checks uit `docs/DEPLOY.md` draaien.
 
 Kan het allemaal in het thema? **Ja.** Alle eigen snippets zijn gewone
 `add_action`/`add_filter`/widget-code zonder afhankelijkheid van de plugin;

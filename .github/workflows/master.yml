@@ -5,7 +5,7 @@ name: Build theme zip
 # - Manually (Actions > Build theme zip > Run workflow): build the zip from
 #   the chosen branch and keep it as a workflow artifact.
 #
-# The zip is made by bin/build-zip.sh, the same script used locally. See DEPLOY.md.
+# The zip is made by bin/build-zip.sh, the same script used locally. See docs/DEPLOY.md.
 
 on:
   release:

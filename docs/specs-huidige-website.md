@@ -49,7 +49,7 @@ Redacteur ───────────┘  wp-admin (blok-editor)
 |---|---|---|---|
 | Angular-app | lifesites.nl (openresty) | Bitbucket `lifesites/life-frontend` | Bitbucket Pipelines → FTP (`master` → productie, `develop` → test) |
 | WordPress | cPanel, `/home/lifesi1q/dev.lifesites.nl`, Imunify360 | — (core + plugins via wp-admin) | updates via wp-admin |
-| Thema | idem | GitHub `mcginkel/lifesites2021` | GitHub-release → zip → WP-admin upload (zie `DEPLOY.md`) |
+| Thema | idem | GitHub `mcginkel/lifesites2021` | GitHub-release → zip → WP-admin upload (zie `docs/DEPLOY.md`) |
 | Code Snippets | in de WP-database | — | via wp-admin |
 
 ## 3. Contentmodel (WordPress)

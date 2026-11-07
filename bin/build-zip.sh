@@ -8,7 +8,7 @@
 # The zip contains only committed files (git archive), wrapped in a
 # lifesites2021/ folder, minus everything marked export-ignore in
 # .gitattributes. Upload it via WP-admin: Appearance > Themes > Add New >
-# Upload Theme > "Replace active with uploaded". See DEPLOY.md.
+# Upload Theme > "Replace active with uploaded". See docs/DEPLOY.md.
 
 set -euo pipefail
 

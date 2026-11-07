@@ -3,7 +3,6 @@
 .gitignore      export-ignore
 .github         export-ignore
 bin             export-ignore
-DEPLOY.md       export-ignore
 README.md       export-ignore
 phpcs.xml.dist  export-ignore
 composer.json   export-ignore
