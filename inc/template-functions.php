@@ -48,10 +48,38 @@ function lifesites2021_pingback_header() {
  * @return string[] { 0: title, 1: subtitle } as plain text (tags stripped).
  */
 function lifesites2021_title_parts( $post = null ) {
-	$parts = preg_split( '/<br\s*\/?>/i', get_the_title( $post ), 2 );
+	return lifesites2021_split_title( get_the_title( $post ) );
+}
+
+/**
+ * Split a title string at the first <br> into plain-text title and subtitle.
+ *
+ * @param string $title Title HTML.
+ * @return string[] { 0: title, 1: subtitle }.
+ */
+function lifesites2021_split_title( $title ) {
+	$parts = preg_split( '/<br\s*\/?>/i', (string) $title, 2 );
 
 	return array(
 		trim( wp_strip_all_tags( $parts[0] ) ),
 		isset( $parts[1] ) ? trim( wp_strip_all_tags( $parts[1] ) ) : '',
 	);
 }
+
+/**
+ * Menu items show only the title, never the "<br/><h2>subtitle</h2>" part.
+ *
+ * For the current page the menu item label is the full page title, which put
+ * the subtitle as a large <h2> inside the dropdown. Only affects the theme's
+ * menu; the app reads menus via REST, which does not run this filter.
+ *
+ * @param string $title Menu item title.
+ * @return string
+ */
+function lifesites2021_nav_menu_item_title( $title ) {
+	if ( ! preg_match( '/<br\s*\/?>/i', $title ) ) {
+		return $title;
+	}
+	return esc_html( lifesites2021_split_title( $title )[0] );
+}
+add_filter( 'nav_menu_item_title', 'lifesites2021_nav_menu_item_title' );
