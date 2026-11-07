@@ -22,3 +22,6 @@ node_modules/
 *.sql
 *.sqlite
 .DS_Store
+
+# built theme zips (bin/build-zip.sh)
+dist/
