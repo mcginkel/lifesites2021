@@ -1,29 +1,50 @@
-name: MasterDeployCI
+name: Build theme zip
+
+# - On a published GitHub release: build the zip from the release tag and
+#   attach it to the release (download it there, upload it in WP-admin).
+# - Manually (Actions > Build theme zip > Run workflow): build the zip from
+#   the chosen branch and keep it as a workflow artifact.
+#
+# The zip is made by bin/build-zip.sh, the same script used locally. See DEPLOY.md.
+
 on:
   release:
     types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
 jobs:
   build:
-    name: Upload Release Asset
+    name: Build and publish theme zip
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Build project
+        uses: actions/checkout@v4
+
+      - name: Check tag matches theme version
+        if: github.event_name == 'release'
         run: |
-          mkdir build
-      - name: Create artifact
-        uses: montudor/action-zip@v0.1.0
+          version="$(sed -n 's/^Version:[[:space:]]*//p' style.css | tr -d '\r')"
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::Release tag $GITHUB_REF_NAME does not match style.css Version $version"
+            exit 1
+          fi
+
+      - name: Build zip
+        run: bin/build-zip.sh "$GITHUB_SHA"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
         with:
-          args: zip -X -r build/lifesites2021.zip . -x *.git* node_modules/\* .* "*/\.*" README.md
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-            name: lifesites2021
-            path: build/lifesites2021.zip
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
-        with:
-          args: build/lifesites2021.zip application/zip
+          name: lifesites2021
+          path: dist/*.zip
+          if-no-files-found: error
+
+      - name: Attach zip to release
+        if: github.event_name == 'release'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "$GITHUB_REF_NAME" dist/*.zip --clobber

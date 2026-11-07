@@ -23,6 +23,18 @@ Route: build a zip from git, upload it in WP-admin. No FTP needed.
 
 ## 2. Build the zip
 
+Either via GitHub (recommended: the zip is tied to a tagged release):
+
+1. On GitHub: Releases → **Draft a new release** → choose tag `vx.y.z`
+   (must match `Version:` in `style.css`, or the build fails) → **Publish release**.
+2. The workflow *Build theme zip* (`.github/workflows/master.yml`) builds the
+   zip and attaches it to the release. Download it from the release page.
+
+The workflow can also be started by hand (Actions → Build theme zip →
+Run workflow) for any branch; the zip is then a downloadable workflow artifact.
+
+Or locally:
+
 ```bash
 bin/build-zip.sh
 ```
@@ -58,7 +70,8 @@ restores it automatically if the install fails.
 
 ## Rollback
 
-Build the previous version and upload it the same way:
+Download the zip from the previous GitHub release, or build it locally,
+and upload it the same way:
 
 ```bash
 bin/build-zip.sh v<previous-version>   # or a commit sha
@@ -74,8 +87,3 @@ contains them, deactivate the snippet:
 |---|---|
 | #7 Gutenberg blocks in rest calls | `inc/rest-blocks.php` |
 | #8 Agenda: kale `<p>` in REST description | `inc/rest-events.php` |
-
-## Not used anymore
-
-`.github/workflows/master.yml` (zip on GitHub release) uses
-`actions/upload-artifact@v2`, which GitHub has retired; it no longer runs.
